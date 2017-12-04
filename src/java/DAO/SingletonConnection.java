@@ -19,7 +19,8 @@ public class SingletonConnection {
     private static Connection con;
     static{
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost\\DESKTOP-LTO8GUD\\ALCRDATE:1434;databaseName=leclub;username=sa;password=0664055465");
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost\\DESKTOP-P21HP3C:1433;databaseName=leclub;username=sa;password=jemapelmaine-1");
+            //con = DriverManager.getConnection("jdbc:sqlserver://localhost\\DESKTOP-LTO8GUD\\ALCRDATE:1434;databaseName=leclub;username=sa;password=0664055465");
         } catch (SQLException ex) {
             Logger.getLogger(SingletonConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
