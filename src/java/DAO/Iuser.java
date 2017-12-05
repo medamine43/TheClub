@@ -5,17 +5,17 @@
  */
 package DAO;
 
-import Metier.service;
+import Metier.user;
 import java.util.List;
 
 /**
  *
  * @author ALCRDATE
  */
-public interface Iservice {
-    public boolean save(service s);
-    public List<service> sericesByName(String name);
-    public List<service> allServices();
+public interface Iuser {
+    public List<user> allUsers();
+    public List<user> usersById(int id);
+    public boolean save(user u);
     public boolean delete(int id);
-    public boolean update(int id , service s);
+    public boolean update(int id, user u);
 }

@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Metier.service;
+import Metier.subscription;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,18 +16,15 @@ import java.util.List;
  *
  * @author ALCRDATE
  */
-public class serviceImpl implements Iservice{
-
-    public serviceImpl() {
-    }
+public class subscriptionImpl implements Isubscription{
 
     @Override
-    public boolean save(service s) {
+    public boolean save(subscription s) {
         Connection conn = SingletonConnection.getCon();
         int r = 0;
         try {
             Statement st = conn.createStatement();
-            r = st.executeUpdate("insert into services (name , description, icon , club_id) values('" + s.getName() + "' , '" + s.getDescription() + "', '" + s.getIcon() + "' , " + s.getClub_id() + " )");
+            r = st.executeUpdate("insert into subscriptions (name , description, price , duration ,club_id) values('" + s.getName() + "' , '" + s.getDescription() + "', " + s.getPrice()+ " , " + s.getDuration()+ " , " + s.getClub_id() + " )");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,20 +32,21 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public List<service> sericesByName(String name) {
+    public List<subscription> subscriptionsByName(String name) {
         Connection conn = SingletonConnection.getCon();
-        service s = null;
-        ArrayList<service> list = new ArrayList<service>();
+        subscription s = null;
+        ArrayList<subscription> list = new ArrayList<subscription>();
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from services where name like '" + name + "%' ");
+            ResultSet rs = st.executeQuery("select * from subscriptions where name like '" + name + "%'");
             while(rs.next()){
                 int id = rs.getInt("id");
                 String nom = rs.getString("name");
                 String description = rs.getString("description");
-                String icon = rs.getString("icon");
+                int duration = rs.getInt("duration");
+                double price = rs.getDouble("price");
                 int club_id = rs.getInt("club_id");
-                s = new service(id, club_id, nom, icon, description);
+                s = new subscription(id, duration, club_id, price, nom , description);
                 list.add(s);
             }
             
@@ -59,20 +57,21 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public List<service> allServices() {
+    public List<subscription> allSubscriptions() {
         Connection conn = SingletonConnection.getCon();
-        service s = null;
-        ArrayList<service> list = new ArrayList<service>();
+        subscription s = null;
+        ArrayList<subscription> list = new ArrayList<subscription>();
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from services");
+            ResultSet rs = st.executeQuery("select * from subscriptions");
             while(rs.next()){
                 int id = rs.getInt("id");
                 String nom = rs.getString("name");
                 String description = rs.getString("description");
-                String icon = rs.getString("icon");
+                int duration = rs.getInt("duration");
+                double price = rs.getDouble("price");
                 int club_id = rs.getInt("club_id");
-                s = new service(id, club_id, nom, icon, description);
+                s = new subscription(id, duration, club_id, price, nom , description);
                 list.add(s);
             }
             
@@ -81,6 +80,7 @@ public class serviceImpl implements Iservice{
         }
         return list;
     }
+   
 
     @Override
     public boolean delete(int id) {
@@ -88,7 +88,7 @@ public class serviceImpl implements Iservice{
         int r = 0;
         try {
             Statement st = conn.createStatement();
-            r = st.executeUpdate("delete from services where id = " + id + "");
+            r = st.executeUpdate("delete from subscriptions where id = " + id + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public boolean update(int id, service s) {
+    public boolean update(int id, subscription s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

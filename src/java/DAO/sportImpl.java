@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Metier.service;
+import Metier.sport;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -16,18 +16,16 @@ import java.util.List;
  *
  * @author ALCRDATE
  */
-public class serviceImpl implements Iservice{
-
-    public serviceImpl() {
-    }
+public class sportImpl implements Isport{
 
     @Override
-    public boolean save(service s) {
+    public boolean save(sport s) {
         Connection conn = SingletonConnection.getCon();
         int r = 0;
         try {
             Statement st = conn.createStatement();
-            r = st.executeUpdate("insert into services (name , description, icon , club_id) values('" + s.getName() + "' , '" + s.getDescription() + "', '" + s.getIcon() + "' , " + s.getClub_id() + " )");
+            r = st.executeUpdate("insert into sports (name , description , icon) values ('" + s.getName() + "' , '" + s.getDescription() + "' , '"+s.getIcon()+"')");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,20 +33,19 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public List<service> sericesByName(String name) {
-        Connection conn = SingletonConnection.getCon();
-        service s = null;
-        ArrayList<service> list = new ArrayList<service>();
+    public List<sport> sportsByName(String name) {
+         Connection conn = SingletonConnection.getCon();
+        sport s = null;
+        ArrayList<sport> list = new ArrayList<sport>();
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from services where name like '" + name + "%' ");
+            ResultSet rs = st.executeQuery("select * from sports where name like '" + name + "%'");
             while(rs.next()){
                 int id = rs.getInt("id");
                 String nom = rs.getString("name");
                 String description = rs.getString("description");
                 String icon = rs.getString("icon");
-                int club_id = rs.getInt("club_id");
-                s = new service(id, club_id, nom, icon, description);
+                s = new sport(id, icon, nom, description);
                 list.add(s);
             }
             
@@ -59,20 +56,19 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public List<service> allServices() {
-        Connection conn = SingletonConnection.getCon();
-        service s = null;
-        ArrayList<service> list = new ArrayList<service>();
+    public List<sport> allSports() {
+         Connection conn = SingletonConnection.getCon();
+        sport s = null;
+        ArrayList<sport> list = new ArrayList<sport>();
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from services");
+            ResultSet rs = st.executeQuery("select * from sports");
             while(rs.next()){
                 int id = rs.getInt("id");
                 String nom = rs.getString("name");
                 String description = rs.getString("description");
                 String icon = rs.getString("icon");
-                int club_id = rs.getInt("club_id");
-                s = new service(id, club_id, nom, icon, description);
+                s = new sport(id, icon, nom, description);
                 list.add(s);
             }
             
@@ -88,7 +84,7 @@ public class serviceImpl implements Iservice{
         int r = 0;
         try {
             Statement st = conn.createStatement();
-            r = st.executeUpdate("delete from services where id = " + id + "");
+            r = st.executeUpdate("delete from sports where id = " + id + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,7 +92,7 @@ public class serviceImpl implements Iservice{
     }
 
     @Override
-    public boolean update(int id, service s) {
+    public boolean update(int id, sport s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -5,17 +5,17 @@
  */
 package DAO;
 
-import Metier.service;
+import Metier.sport;
 import java.util.List;
 
 /**
  *
  * @author ALCRDATE
  */
-public interface Iservice {
-    public boolean save(service s);
-    public List<service> sericesByName(String name);
-    public List<service> allServices();
+public interface Isport {
+    public boolean save(sport s);
+    public List<sport> sportsByName(String name);
+    public List<sport> allSports();
     public boolean delete(int id);
-    public boolean update(int id , service s);
+    public boolean update(int id , sport s);
 }
