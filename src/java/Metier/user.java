@@ -14,10 +14,10 @@ import java.sql.Date;
  */
 public class user implements Serializable{
     int id, telephone, gender, city_id;
-    String firstName , secondName, email , password, adress;
+    String firstName , secondName, email , password, adress,cin;
     Date dateOfBirth;
 
-    public user(int id, int telephone, int gender, int city_id, String firstName, String secondName, String email, String password, String adress, Date dateOfBirth) {
+    public user(int id, int telephone, int gender, int city_id, String firstName, String secondName, String cin ,String email, String password, String adress, Date dateOfBirth) {
         this.id = id;
         this.telephone = telephone;
         this.gender = gender;
@@ -28,6 +28,15 @@ public class user implements Serializable{
         this.password = password;
         this.adress = adress;
         this.dateOfBirth = dateOfBirth;
+        this.cin = cin;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
     }
     
     public user(){}
