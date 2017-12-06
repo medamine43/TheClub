@@ -16,6 +16,7 @@ public class promotion implements Serializable{
     private int id;
     private String name;
     private String description;
+    private double price;
     private Date date_start;
     private Date date_end;
     private int club_id;
@@ -23,13 +24,22 @@ public class promotion implements Serializable{
     public promotion() {
     }
 
-    public promotion(int id, String name, String description, Date date_start, Date date_end, int club_id) {
+    public promotion(int id, String name, String description,double price, Date date_start, Date date_end, int club_id) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.date_start = date_start;
         this.date_end = date_end;
         this.club_id = club_id;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public int getId() {
