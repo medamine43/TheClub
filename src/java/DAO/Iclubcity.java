@@ -5,10 +5,16 @@
  */
 package DAO;
 
+import Metier.clubcity;
+import java.util.List;
+
 /**
  *
  * @author Mohamed
  */
 public interface Iclubcity {
-    
+    public boolean save(clubcity c);
+    public List<clubcity> clubcity();
+    public boolean delete(int key);
+    public clubcity clubcityByKey(int key);
 }

@@ -40,7 +40,7 @@ public class clubImpl implements Iclub{
 
     @Override
     public List<club> clubsByName(String key) {
-         List<club> ls = new ArrayList<club>();
+         List<club> ls = new ArrayList<>();
          club cl = new club();
             try {
                 Statement st = conn.createStatement();
@@ -79,7 +79,7 @@ public class clubImpl implements Iclub{
 
     @Override
     public List<club> clubs() {
-        List<club> ls = new ArrayList<club>();
+        List<club> ls = new ArrayList<>();
             try {
                 Statement st = conn.createStatement();
                 ResultSet r = st.executeQuery("select * from clubs");

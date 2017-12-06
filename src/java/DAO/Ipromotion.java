@@ -5,10 +5,17 @@
  */
 package DAO;
 
+import Metier.promotion;
+import java.util.List;
+
 /**
  *
  * @author Mohamed
  */
 public interface Ipromotion {
-    
+    public boolean save(promotion p);
+    public List<promotion> promotionByName(String key);
+    public List<promotion> promotions();
+    public boolean delete(int key);
+    public promotion promotionByKey(int key);
 }
